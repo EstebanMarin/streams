@@ -1,6 +1,9 @@
 package streams
 
-import scala.annotation.unchecked.uncheckedVariance
+import scala.util.Try
+import scala.util.Success.apply
+import scala.util.Success
+import scala.util.Failure
 
 /** This component implements a parser to define terrains from a graphical ASCII
   * representation.
@@ -8,11 +11,7 @@ import scala.annotation.unchecked.uncheckedVariance
   * When mixing in that component, a level can be defined by defining the field
   * `level` in the following form:
   *
-  * val level = """------
-  * \|--ST--
-  * \|--oo--
-  * \|--oo--
-  * \|------""".stripMargin
+  * val level = """------ \|--ST-- \|--oo-- \|--oo-- \|------""".stripMargin
   *
   *   - The `-` character denotes parts which are outside the terrain
   *   - `o` denotes fields which are part of the terrain
@@ -35,9 +34,7 @@ trait StringParserTerrain extends GameDef:
     * `levelVector`. The vector contains parsed version of the `level` string.
     * For example, the following level
     *
-    * val level = """ST
-    * \|oo
-    * \|oo""".stripMargin
+    * val level = """ST \|oo \|oo""".stripMargin
     *
     * is represented as
     *
@@ -47,11 +44,21 @@ trait StringParserTerrain extends GameDef:
     * valid position (not a '-' character) inside the terrain described by
     * `levelVector`.
     */
-  def terrainFunction(levelVector: Vector[Vector[Char]]): Pos => Boolean =
-    val test =
-      for (lV: Vector[Char], col: Int) <- levelVector.zipWithIndex
-      yield ???
-    (pos: Pos) => true
+
+  type Level = Vector[Char]
+
+  private def getCharInt(lV: Level, row: Int) =
+    Try(lV(row)) match
+      case Success(v) => Some(v)
+      case Failure(_) => None
+
+  def terrainFunction(levelVector: Vector[Level]): Pos => Boolean =
+    (pos: Pos) =>
+      val test = for
+        (cV: Level, col: Int) <- levelVector.zipWithIndex
+        value = if col == pos.col then getCharInt(cV, pos.row) else None
+      yield value
+      ???
 
   /** This function should return the position of character `c` in the terrain
     * described by `levelVector`. You can assume that the `c` appears exactly
