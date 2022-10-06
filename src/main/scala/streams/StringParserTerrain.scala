@@ -57,14 +57,10 @@ trait StringParserTerrain extends GameDef:
               case _               => false
           case Failure(_) => false
 
-      val test = for
+      (for
         (cV: Level, row: Int) <- levelVector.zipWithIndex
         value = if row == pos.row then checkChar(cV, pos.row) else false
-        teopt = println(s"[COL] $row [LEVEL] => $cV")
-      yield value
-      
-      val returnT = test.fold(false)(_ || _)
-      returnT
+      yield value).fold(false)(_ || _)
 
   /** This function should return the position of character `c` in the terrain
     * described by `levelVector`. You can assume that the `c` appears exactly

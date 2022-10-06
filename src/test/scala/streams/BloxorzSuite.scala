@@ -1,5 +1,7 @@
 package streams
 
+import org.scalacheck.Prop.forAll
+
 import Bloxorz.*
 
 class BloxorzSuite extends munit.FunSuite:
@@ -40,10 +42,13 @@ class BloxorzSuite extends munit.FunSuite:
     new Level1:
       val in = Pos(0,0)
       val out = Pos(2,1)
+      val out2 = Pos(50,-90)
       val inAs = terrainFunction(mapTest)(in)
       val outAs = terrainFunction(mapTest)(out)
-      assert(inAs, true)
+      val outAs2 = terrainFunction(mapTest)(out2)
+      assertEquals(inAs, true)
       assertEquals(outAs, false)
+      assertEquals(outAs2, false)
   }
 
   // test("terrain function level 1 (10pts)") {
