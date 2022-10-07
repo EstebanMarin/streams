@@ -56,7 +56,6 @@ trait StringParserTerrain extends GameDef:
               case 'o' | 'S' | 'T' => true
               case _               => false
           case Failure(_) => false
-
       (for
         (cV: Level, row: Int) <- levelVector.zipWithIndex
         value = if row == pos.row then checkChar(cV, pos.row) else false
@@ -69,7 +68,13 @@ trait StringParserTerrain extends GameDef:
     * Hint: you can use the functions `indexWhere` and / or `indexOf` of the
     * `Vector` class
     */
-  def findChar(c: Char, levelVector: Vector[Vector[Char]]): Pos = ???
+  def findChar(c: Char, levelVector: Vector[Level]): Pos =
+    (for
+      (lV: Level, row: Int) <- levelVector.zipWithIndex
+      col = lV.indexOf(c)
+      (char, col) <- lV.zipWithIndex
+      if char == c
+    yield Pos(row, col))(0)
 
   private lazy val vector: Vector[Vector[Char]] =
     Vector(level.split("\r?\n").map(str => Vector(str*)).toIndexedSeq*)

@@ -40,15 +40,30 @@ class BloxorzSuite extends munit.FunSuite:
 
   test("Basic terrainFunction check") {
     new Level1:
-      val in = Pos(0,0)
-      val out = Pos(2,1)
-      val out2 = Pos(50,-90)
+      val in = Pos(0, 0)
+      val out = Pos(2, 1)
+      val out2 = Pos(50, -90)
       val inAs = terrainFunction(mapTest)(in)
       val outAs = terrainFunction(mapTest)(out)
       val outAs2 = terrainFunction(mapTest)(out2)
       assertEquals(inAs, true)
       assertEquals(outAs, false)
-      assertEquals(outAs2, false)
+      assertEquals(outAs, false)
+  }
+
+  test("findChar") {
+    new Level1:
+      val s = Pos(0, 0)
+      val t = Pos(0, 1)
+      val `-1` = Pos(1, 1)
+      val `-2` = Pos(2, 1)
+      val set = Set(`-1`, `-2`)
+      val inAs = findChar('S', mapTest)
+      val inAs2 = findChar('T', mapTest)
+      val inAs3 = findChar('-', mapTest)
+      assertEquals(inAs, s)
+      assertEquals(inAs2, t)
+      assertEquals(set.contains(inAs3), true)
   }
 
   // test("terrain function level 1 (10pts)") {
@@ -65,10 +80,10 @@ class BloxorzSuite extends munit.FunSuite:
   //     assert(!terrain(Pos(0, -1)), "0,-1")
   // }
 
-  // test("find char level 1 (10pts)") {
-  //   new Level1:
-  //     assertEquals(startPos, Pos(1, 1))
-  // }
+  test("find char level 1 (10pts)") {
+    new Level1:
+      assertEquals(startPos, Pos(1, 1))
+  }
 
   // test("optimal solution for level 1 (5pts)") {
   //   new Level1:
