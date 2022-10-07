@@ -86,6 +86,29 @@ class BloxorzSuite extends munit.FunSuite:
       assertEquals(startPos, Pos(1, 1))
   }
 
+  test("Test Block isStanding") {
+    new Level1:
+      val block1 = Pos(0, 0)
+      val block2 = Pos(0, 0)
+      val block3 = Pos(0, 1)
+      val blockUp = Block(block1, block2)
+      val blockDown = Block(block1, block3)
+      assertEquals(blockUp.isStanding, true)
+      assertEquals(blockDown.isStanding, false)
+  }
+
+  test("Test Legal positions") {
+    new Level1:
+      val block1 = Pos(0, 0)
+      val block2 = Pos(0, 0)
+      val block3 = Pos(0, 4)
+      val block4 = Pos(0, 5)
+      val blockLegal = Block(block1, block2)
+      val blockiLegal = Block(block3, block4)
+      assertEquals(blockLegal.isLegal, true)
+      assertEquals(blockiLegal.isLegal, false)
+  }
+
   // test("optimal solution for level 1 (5pts)") {
   //   new Level1:
   //     assertEquals(solve(solution), Block(goal, goal))
