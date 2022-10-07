@@ -16,8 +16,7 @@ trait GameDef:
     * 0 1 2 3 <- col axis 0 o o o o 1 o o o o 2 o # o o # is at position Pos(2,
     * 1) 3 o o o o
     *
-    * ^
-    * \|
+    * ^ \|
     *
     * row axis
     */
@@ -117,7 +116,8 @@ trait GameDef:
     /** Returns the list of positions reachable from the current block which are
       * inside the terrain.
       */
-    def legalNeighbors: List[(Block, Move)] = ???
+    def legalNeighbors: List[(Block, Move)] =
+      neighbors.filter((block, _) => block.isLegal)
 
     /** Returns `true` if the block is standing.
       */
