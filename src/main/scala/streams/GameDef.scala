@@ -117,7 +117,7 @@ trait GameDef:
       * inside the terrain.
       */
     def legalNeighbors: List[(Block, Move)] =
-      neighbors.filter((block, _) => block.isLegal)
+      if this.isLegal then neighbors.filter((block, _) => block.isLegal) else Nil
 
     /** Returns `true` if the block is standing.
       */
