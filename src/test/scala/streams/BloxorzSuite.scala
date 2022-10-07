@@ -21,6 +21,14 @@ class BloxorzSuite extends munit.FunSuite:
           case Down  => block.down
       }
 
+  trait Level0 extends SolutionChecker:
+    val level =
+      """------
+        |--S---
+        |--o---
+        |--o---
+        |--T---""".stripMargin
+
   trait Level1 extends SolutionChecker:
     /* terrain for level 1*/
 
@@ -120,10 +128,17 @@ class BloxorzSuite extends munit.FunSuite:
         (Block(Pos(0, 1), Pos(0, 2)), Move.Right),
         (Block(Pos(1, 0), Pos(2, 0)), Move.Down)
       )
-      println(blockLegal)
       val blockiLegal = Block(block3, block4).legalNeighbors
       assertEquals(blockiLegal, Nil)
       assertEquals(blockLegal, legalOption)
+  }
+
+  test("neighbors with history test") {
+    new Level0:
+      val blockLegal = startBlock
+      val test = neighborsWithHistory(blockLegal, Nil).head
+      val legalMove = (Block(Pos(2,2),Pos(3,2)),List(Move.Down))
+      assertEquals(test, legalMove)
   }
 
   // test("optimal solution for level 1 (5pts)") {
