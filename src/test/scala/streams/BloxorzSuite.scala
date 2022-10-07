@@ -133,12 +133,18 @@ class BloxorzSuite extends munit.FunSuite:
       assertEquals(blockLegal, legalOption)
   }
 
-  test("neighbors with history test") {
+  test("neighbors with history test and finished") {
     new Level0:
       val blockLegal = startBlock
       val test = neighborsWithHistory(blockLegal, Nil).head
-      val legalMove = (Block(Pos(2,2),Pos(3,2)),List(Move.Down))
+      val otherLegalMove =
+        neighborsWithHistory(Block(Pos(2, 2), Pos(3, 2)), List(Move.Down))
+      val legalMove = (Block(Pos(2, 2), Pos(3, 2)), List(Move.Down))
+      val finishedMov =
+        (Block(Pos(4, 2), Pos(4, 2)), List(Move.Down, Move.Down))
       assertEquals(test, legalMove)
+      assertEquals(done(otherLegalMove.tail.head._1), true)
+      assertEquals(otherLegalMove.tail.head, finishedMov)
   }
 
   // test("optimal solution for level 1 (5pts)") {
