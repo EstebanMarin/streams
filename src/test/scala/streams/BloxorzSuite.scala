@@ -51,34 +51,35 @@ class BloxorzSuite extends munit.FunSuite:
       assertEquals(outAs, false)
   }
 
-  test("findChar") {
+  test("testing find Char with bigger terrain") {
     new Level1:
-      val s = Pos(0, 0)
-      val t = Pos(0, 1)
-      val `-1` = Pos(1, 1)
-      val `-2` = Pos(2, 1)
-      val set = Set(`-1`, `-2`)
-      val inAs = findChar('S', mapTest)
-      val inAs2 = findChar('T', mapTest)
-      val inAs3 = findChar('-', mapTest)
-      assertEquals(inAs, s)
-      assertEquals(inAs2, t)
-      assertEquals(set.contains(inAs3), true)
+      val in1 = Pos(1, 1)
+      val in2 = Pos(4, 7)
+      val out1 = Pos(5, 2)
+      val out2 = Pos(50, 2)
+      val in1T = terrain(in1)
+      val in2T = terrain(in2)
+      val out1T = terrain(out1)
+      val out2T = terrain(out2)
+      assertEquals(in1T, true)
+      assertEquals(in2T, true)
+      assertEquals(out1T, false)
+      assertEquals(out2T, false)
   }
 
-  // test("terrain function level 1 (10pts)") {
-  //   new Level1:
-  //     assert(terrain(Pos(0, 0)), "0,0")
-  //     assert(terrain(Pos(1, 1)), "1,1") // start
-  //     assert(terrain(Pos(4, 7)), "4,7") // goal
-  //     assert(terrain(Pos(5, 8)), "5,8")
-  //     assert(!terrain(Pos(5, 9)), "5,9")
-  //     assert(terrain(Pos(4, 9)), "4,9")
-  //     assert(!terrain(Pos(6, 8)), "6,8")
-  //     assert(!terrain(Pos(4, 11)), "4,11")
-  //     assert(!terrain(Pos(-1, 0)), "-1,0")
-  //     assert(!terrain(Pos(0, -1)), "0,-1")
-  // }
+  test("terrain function level 1 (10pts)") {
+    new Level1:
+      assert(terrain(Pos(0, 0)), "0,0")
+      assert(terrain(Pos(1, 1)), "1,1") // start
+      assert(terrain(Pos(4, 7)), "4,7") // goal
+      assert(terrain(Pos(5, 8)), "5,8")
+      assert(!terrain(Pos(5, 9)), "5,9")
+      assert(terrain(Pos(4, 9)), "4,9")
+      assert(!terrain(Pos(6, 8)), "6,8")
+      assert(!terrain(Pos(4, 11)), "4,11")
+      assert(!terrain(Pos(-1, 0)), "-1,0")
+      assert(!terrain(Pos(0, -1)), "0,-1")
+  }
 
   test("find char level 1 (10pts)") {
     new Level1:

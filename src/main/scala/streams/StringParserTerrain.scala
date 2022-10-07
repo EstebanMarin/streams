@@ -58,7 +58,7 @@ trait StringParserTerrain extends GameDef:
           case Failure(_) => false
       (for
         (cV: Level, row: Int) <- levelVector.zipWithIndex
-        value = if row == pos.row then checkChar(cV, pos.row) else false
+        value = if row == pos.row then checkChar(cV, pos.col) else false
       yield value).fold(false)(_ || _)
 
   /** This function should return the position of character `c` in the terrain
@@ -68,13 +68,10 @@ trait StringParserTerrain extends GameDef:
     * Hint: you can use the functions `indexWhere` and / or `indexOf` of the
     * `Vector` class
     */
-  def findChar(c: Char, levelVector: Vector[Level]): Pos =
-    (for
-      (lV: Level, row: Int) <- levelVector.zipWithIndex
-      col = lV.indexOf(c)
-      (char, col) <- lV.zipWithIndex
-      if char == c
-    yield Pos(row, col))(0)
+  def findChar(c: Char, levelVector: Vector[Level]): Pos = 
+    val row = levelVector.indexWhere(_.contains(c))
+    val col = levelVector(row).indexOf(c)
+    Pos(row, col)
 
   private lazy val vector: Vector[Vector[Char]] =
     Vector(level.split("\r?\n").map(str => Vector(str*)).toIndexedSeq*)
