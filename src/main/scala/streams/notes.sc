@@ -34,15 +34,22 @@ class Pouring(full: State):
 
   def pathsFrom(paths: List[Path], explored: Set[State]): LazyList[List[Path]] =
     val frontier =
-      for 
+      for
         path <- paths
         move <- moves
         next = path.extend(move)
         if !explored.contains(next.endState)
       yield next
     paths #:: pathsFrom(frontier, explored ++ frontier.map(_.endState))
-  
-  def solution(target: Int): LazyList[Path] =
+
+  def solutions(target: Int): LazyList[Path] =
     for
-      paths <- pathsFrom(???)
-    yield ???
+      paths <- pathsFrom(List(start), Set(empty))
+      path <- paths
+      if path.endState.contains(target)
+    yield path
+
+end Pouring
+
+val problem = Vector(4,7)
+problem.solutions(6).head

@@ -178,8 +178,22 @@ class BloxorzSuite extends munit.FunSuite:
         ).to(LazyList),
         Set(Block(Pos(1, 2), Pos(1, 3)), Block(Pos(1, 1), Pos(1, 1)))
       )
-      val compare = (Block(Pos(2, 1), Pos(3, 1)), List(Move.Down, Move.Left, Move.Up))
+      val compare =
+        (Block(Pos(2, 1), Pos(3, 1)), List(Move.Down, Move.Left, Move.Up))
       assertEquals(test.head, compare)
+  }
+
+  test("from function test") {
+    new Level0:
+      val blockLegal = startBlock
+      val history = List.empty
+      val neighborsStream = neighborsWithHistory(blockLegal, history)
+      val test = from(neighborsStream, Set.empty).head
+      val test2 = from(neighborsStream, Set.empty).head
+      println(test)
+      println(test2)
+
+      assertEquals(true, true)
   }
 
   // test("optimal solution for level 1 (5pts)") {
