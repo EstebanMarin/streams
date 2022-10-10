@@ -63,7 +63,8 @@ trait Solver extends GameDef:
   def from(
       initial: LazyList[(Block, List[Move])],
       explored: Set[Block]
-  ): LazyList[(Block, List[Move])] = ???
+  ): LazyList[(Block, List[Move])] =
+    ???
 
   /** The lazy list of all paths that begin at the starting block.
     */
