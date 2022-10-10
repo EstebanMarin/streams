@@ -154,7 +154,6 @@ class BloxorzSuite extends munit.FunSuite:
         Block(Pos(1, 1), Pos(1, 1)),
         List(Move.Left, Move.Up)
       )
-      println(test.head)
       assertEquals(test.head._2, List(Move.Right, Move.Left, Move.Up))
   }
 
@@ -166,6 +165,23 @@ class BloxorzSuite extends munit.FunSuite:
       val test = (Block(Pos(2, 2), Pos(3, 2)), List(Move.Down))
       assertEquals(test._2(0), test._2(0))
   }
+
+  test("new Neightbors only web test") {
+    new Level1:
+      val blockLegal = startBlock
+      val history = List.empty
+      val neighborsStream = neighborsWithHistory(blockLegal, history)
+      val test = newNeighborsOnly(
+        Set(
+          (Block(Pos(1, 2), Pos(1, 3)), List(Move.Right, Move.Left, Move.Up)),
+          (Block(Pos(2, 1), Pos(3, 1)), List(Move.Down, Move.Left, Move.Up))
+        ).to(LazyList),
+        Set(Block(Pos(1, 2), Pos(1, 3)), Block(Pos(1, 1), Pos(1, 1)))
+      )
+      val compare = (Block(Pos(2, 1), Pos(3, 1)), List(Move.Down, Move.Left, Move.Up))
+      assertEquals(test.head, compare)
+  }
+
   // test("optimal solution for level 1 (5pts)") {
   //   new Level1:
   //     assertEquals(solve(solution), Block(goal, goal))
