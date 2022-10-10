@@ -31,3 +31,18 @@ class Pouring(full: State):
 
   val empty: State = full.map(x => 0)
   val start = Path(Nil, empty)
+
+  def pathsFrom(paths: List[Path], explored: Set[State]): LazyList[List[Path]] =
+    val frontier =
+      for 
+        path <- paths
+        move <- moves
+        next = path.extend(move)
+        if !explored.contains(next.endState)
+      yield next
+    paths #:: pathsFrom(frontier, explored ++ frontier.map(_.endState))
+  
+  def solution(target: Int): LazyList[Path] =
+    for
+      paths <- pathsFrom(???)
+    yield ???

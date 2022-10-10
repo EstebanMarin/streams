@@ -26,7 +26,7 @@ trait Solver extends GameDef:
   def neighborsWithHistory(
       b: Block,
       history: List[Move]
-  ): LazyList[(Block, List[Move])] =
+  ): LazyList[(Block, List[Move])] = 
     b.legalNeighbors.map((block, move) => (block, move +: history)).to(LazyList)
 
   /** This function returns the list of neighbors without the block positions
