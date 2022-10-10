@@ -36,7 +36,8 @@ trait Solver extends GameDef:
   def newNeighborsOnly(
       neighbors: LazyList[(Block, List[Move])],
       explored: Set[Block]
-  ): LazyList[(Block, List[Move])] = ???
+  ): LazyList[(Block, List[Move])] =
+    neighbors.filterNot(x => explored.contains(x._1))
 
   /** The function `from` returns the lazy list of all possible paths that can
     * be followed, starting at the `head` of the `initial` lazy list.

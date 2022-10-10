@@ -147,6 +147,19 @@ class BloxorzSuite extends munit.FunSuite:
       assertEquals(otherLegalMove.tail.head, finishedMov)
   }
 
+  test("test new neighBours only") {
+    new Level1:
+      val blockLegal = startBlock
+      val history = List.empty
+      val neighborsStream = neighborsWithHistory(blockLegal, history)
+      // val fh1 = neighborsStream.head
+      println(s"Start => $blockLegal")
+      println(neighborsStream.head)
+      println(neighborsStream.tail.head)
+      // println(neighborsStream.tail.tail.head)
+      // println(neighborsStream.tail.tail.tail.head)
+      assertEquals(true, true)
+  }
   // test("optimal solution for level 1 (5pts)") {
   //   new Level1:
   //     assertEquals(solve(solution), Block(goal, goal))
