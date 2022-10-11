@@ -33,7 +33,7 @@ class Pouring(full: State):
   val start = Path(Nil, empty)
 
   def pathsFrom(paths: List[Path], explored: Set[State]): LazyList[List[Path]] =
-    val frontier =
+    val frontier: List[Path] =
       for
         path <- paths
         move <- moves
@@ -51,5 +51,5 @@ class Pouring(full: State):
 
 end Pouring
 
-val problem = Vector(4,7)
+val problem = Vector(4, 7)
 problem.solutions(6).head

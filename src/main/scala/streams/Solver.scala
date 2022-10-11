@@ -66,27 +66,19 @@ trait Solver extends GameDef:
   val testStartBlock: Block = ???
   val testListMove: List[Move] = ???
 
-  def bfs(
-      visited: Set[Block],
-      queue: Queue[(Block, List[Move])]
-  ): Option[List[Move]] =
-    if queue.isEmpty then Some(???) else 
-      val (current, updatedQueue) = queue.dequeue
-      val (block, movesUpUntil) = current
-      val neighbors = neighborsWithHistory(block, movesUpUntil)
-      val frontierInOrder = ???
-        for
-          (block, moves) <- newNeighborsOnly(neighbors, visited)
-        yield ???
-      ???
-      here
-    bfs(Set(testStartBlock), Queue(testStartBlock -> testListMove))
-
   def from(
       initial: LazyList[(Block, List[Move])],
       explored: Set[Block]
   ): LazyList[(Block, List[Move])] =
-    // implement a breadth-first search manner
+    val test = initial match
+      case LazyList() => LazyList.empty
+      case x #:: xs => ???
+      // case x :: rem =>
+      //   val (block, moves) = x
+      //   val neighbors =
+      //     newNeighborsOnly(neighborsWithHistory(block, history), explored)
+      //   val newExplore = explored.union(neighbors)
+      //   (block, history) #:: from(rem #::: neighbors, newExplore)
 
     for
       (block, moves) <- newNeighborsOnly(initial, explored)
