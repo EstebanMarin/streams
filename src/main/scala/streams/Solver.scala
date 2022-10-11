@@ -63,28 +63,17 @@ trait Solver extends GameDef:
     * lazy list.
     */
 
-  val testStartBlock: Block = ???
-  val testListMove: List[Move] = ???
-
   def from(
       initial: LazyList[(Block, List[Move])],
       explored: Set[Block]
   ): LazyList[(Block, List[Move])] =
-    val test = initial match
+    initial match
       case LazyList() => LazyList.empty
-      case x #:: xs => ???
-      // case x :: rem =>
-      //   val (block, moves) = x
-      //   val neighbors =
-      //     newNeighborsOnly(neighborsWithHistory(block, history), explored)
-      //   val newExplore = explored.union(neighbors)
-      //   (block, history) #:: from(rem #::: neighbors, newExplore)
-
-    for
-      (block, moves) <- newNeighborsOnly(initial, explored)
-      updatedExplored =
-        if !explored.contains(block) then explored + block else explored
-    yield (block -> moves)
+      case (block, history) #:: rem =>
+        val neighbors =
+          newNeighborsOnly(neighborsWithHistory(block, history), explored)
+        val newExpore = explored.union(Set(block))
+        (block, history) #:: from(rem #::: neighbors, newExpore)
 
   /** The lazy list of all paths that begin at the starting block.
     */
