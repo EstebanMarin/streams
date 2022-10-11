@@ -77,7 +77,11 @@ trait Solver extends GameDef:
 
   /** The lazy list of all paths that begin at the starting block.
     */
-  lazy val pathsFromStart: LazyList[(Block, List[Move])] = ???
+  lazy val pathsFromStart: LazyList[(Block, List[Move])] =
+    from(
+      newNeighborsOnly(neighborsWithHistory(startBlock, Nil), Set.empty),
+      Set.empty
+    )
 
   /** Returns a lazy list of all possible pairs of the goal block along with the
     * history how it was reached.
