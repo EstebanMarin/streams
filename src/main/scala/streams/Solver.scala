@@ -1,5 +1,7 @@
 package streams
 
+import scala.collection.immutable.Queue
+
 /** This component implements the solver for the Bloxorz game
   */
 trait Solver extends GameDef:
@@ -60,11 +62,32 @@ trait Solver extends GameDef:
     * paths - the implementation should naturally construct the correctly sorted
     * lazy list.
     */
+
+  val testStartBlock: Block = ???
+  val testListMove: List[Move] = ???
+
+  def bfs(
+      visited: Set[Block],
+      queue: Queue[(Block, List[Move])]
+  ): Option[List[Move]] =
+    if queue.isEmpty then Some(???) else 
+      val (current, updatedQueue) = queue.dequeue
+      val (block, movesUpUntil) = current
+      val neighbors = neighborsWithHistory(block, movesUpUntil)
+      val frontierInOrder = ???
+        for
+          (block, moves) <- newNeighborsOnly(neighbors, visited)
+        yield ???
+      ???
+      here
+    bfs(Set(testStartBlock), Queue(testStartBlock -> testListMove))
+
   def from(
       initial: LazyList[(Block, List[Move])],
       explored: Set[Block]
   ): LazyList[(Block, List[Move])] =
     // implement a breadth-first search manner
+
     for
       (block, moves) <- newNeighborsOnly(initial, explored)
       updatedExplored =

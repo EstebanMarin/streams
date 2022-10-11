@@ -188,12 +188,13 @@ class BloxorzSuite extends munit.FunSuite:
       val blockLegal = startBlock
       val history = List.empty
       val neighborsStream = neighborsWithHistory(blockLegal, history)
-      val test = from(neighborsStream, Set.empty).head
-      val test2 = from(neighborsStream, Set.empty).head
-      println(test)
-      println(test2)
+      val fromStream = from(neighborsStream, Set.empty)
+      val almostBogus = fromStream.head
+      val compare1 = (Block(Pos(2,2),Pos(3,2)),List(Move.Down))
 
-      assertEquals(true, true)
+      
+
+      assertEquals(almostBogus, compare1)
   }
 
   // test("optimal solution for level 1 (5pts)") {
