@@ -96,4 +96,4 @@ trait Solver extends GameDef:
     * move that the player should perform from the starting position.
     */
   lazy val solution: List[Move] =
-    pathsToGoal.head._2
+    if pathsToGoal.isEmpty then Nil else pathsToGoal.head._2
