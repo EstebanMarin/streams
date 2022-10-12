@@ -207,16 +207,13 @@ class BloxorzSuite extends munit.FunSuite:
       assertEquals(almostBogus, compare1)
   }
 
-  // test("optimal solution for level 0") {
-  //   new Level0:
-  //     val compare = solve(solution)
-  //     println(solution)
-  //     println(compare)
-  //     val blockGoal = Block(goal, goal)
+  test("optimal solution for level 0") {
+    new Level0:
+      val compare = solve(solution)
+      val blockGoal = Block(goal, goal)
 
-  //     assertEquals(true, true)
-  //     // assertEquals(compare, blockGoal)
-  // }
+      assertEquals(compare, blockGoal)
+  }
 
   // test("optimal solution for level 3") {
   //   new Level3:
