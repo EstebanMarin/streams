@@ -24,10 +24,13 @@ class BloxorzSuite extends munit.FunSuite:
   trait Level3 extends SolutionChecker:
       val level =
         """------
-          |--S-T-
-          |--o-o-
-          |--o-o-
-          |--ooo-""".stripMargin
+          |--S---
+          |--o---
+          |--o---
+          |--o---
+          |--o---
+          |--o---
+          |--T---""".stripMargin
 
   trait Level0 extends SolutionChecker:
     val level =
@@ -215,13 +218,13 @@ class BloxorzSuite extends munit.FunSuite:
       assertEquals(compare, blockGoal)
   }
 
-  // test("optimal solution for level 3") {
-  //   new Level3:
-  //     val compare = solve(solution)
-  //     val blockGoal = Block(goal, goal)
+  test("optimal solution for level 3") {
+    new Level3:
+      val compare = solve(solution)
+      val blockGoal = Block(goal, goal)
 
-  //     assertEquals(compare, blockGoal)
-  // }
+      assertEquals(compare, blockGoal)
+  }
 
   // test("optimal solution for level 1 (5pts)") {
   //   new Level1:
