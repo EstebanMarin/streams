@@ -226,10 +226,10 @@ class BloxorzSuite extends munit.FunSuite:
       assertEquals(compare, blockGoal)
   }
 
-  // test("optimal solution for level 1 (5pts)") {
-  //   new Level1:
-  //     assertEquals(solve(solution), Block(goal, goal))
-  // }
+  test("optimal solution for level 1 (5pts)") {
+    new Level1:
+      assertEquals(solve(solution), Block(goal, goal))
+  }
 
   // test("optimal solution length for level 1 (5pts)") {
   //   new Level1:
