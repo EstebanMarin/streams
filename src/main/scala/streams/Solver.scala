@@ -86,7 +86,8 @@ trait Solver extends GameDef:
   /** Returns a lazy list of all possible pairs of the goal block along with the
     * history how it was reached.
     */
-  lazy val pathsToGoal: LazyList[(Block, List[Move])] = ???
+  lazy val pathsToGoal: LazyList[(Block, List[Move])] =
+    pathsFromStart.filter((block, _) => done(block))
 
   /** The (or one of the) shortest sequence(s) of moves to reach the goal. If
     * the goal cannot be reached, the empty list is returned.
@@ -94,4 +95,5 @@ trait Solver extends GameDef:
     * Note: the `head` element of the returned list should represent the first
     * move that the player should perform from the starting position.
     */
-  lazy val solution: List[Move] = ???
+  lazy val solution: List[Move] =
+    pathsToGoal.head._2

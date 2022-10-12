@@ -39,6 +39,7 @@ class BloxorzSuite extends munit.FunSuite:
       |-ooooooooo
       |-----ooToo
       |------ooo-""".stripMargin
+  
 
     val mapTest =
       Vector(Vector('S', 'T'), Vector('o', '-'), Vector('o', '-'))
@@ -195,6 +196,14 @@ class BloxorzSuite extends munit.FunSuite:
       
 
       assertEquals(almostBogus, compare1)
+  }
+
+  test("optimal solution for level 0") {
+    new Level0:
+      val compare = solve(solution)
+      val blockGoal = Block(goal, goal)
+
+      assertEquals(compare, blockGoal)
   }
 
   // test("optimal solution for level 1 (5pts)") {
