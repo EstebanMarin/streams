@@ -29,7 +29,7 @@ trait Solver extends GameDef:
       b: Block,
       history: List[Move]
   ): LazyList[(Block, List[Move])] =
-    b.legalNeighbors.map((block, move) => (block, move +: history)).to(LazyList)
+    b.legalNeighbors.map((block, move) => (block, history :+ move)).to(LazyList)
 
   /** This function returns the list of neighbors without the block positions
     * that have already been explored. We will use it to make sure that we don't
@@ -71,16 +71,16 @@ trait Solver extends GameDef:
       case LazyList() => LazyList.empty
       case (block, history) #:: rem =>
         val neighbors =
-          newNeighborsOnly(neighborsWithHistory(block, history), explored)
-        val newExpore = explored.union(Set(block))
-        (block, history) #:: from(rem #::: neighbors, newExpore)
+            newNeighborsOnly(neighborsWithHistory(block, history), explored)
+        val frontier = explored.union(Set(block))
+        (block, history) #:: from(rem #::: neighbors, frontier)
 
   /** The lazy list of all paths that begin at the starting block.
     */
   lazy val pathsFromStart: LazyList[(Block, List[Move])] =
     from(
-      newNeighborsOnly(neighborsWithHistory(startBlock, Nil), Set.empty),
-      Set.empty
+      newNeighborsOnly(neighborsWithHistory(startBlock, Nil), Set(startBlock)),
+      Set(startBlock)
     )
 
   /** Returns a lazy list of all possible pairs of the goal block along with the
