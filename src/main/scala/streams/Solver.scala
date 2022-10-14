@@ -62,6 +62,7 @@ trait Solver extends GameDef:
     * paths - the implementation should naturally construct the correctly sorted
     * lazy list.
     */
+  val test = List(1,2,3).min
 
   def from(
       initial: LazyList[(Block, List[Move])],
